@@ -1,0 +1,21 @@
+import Link from "next/link";
+
+export function Footer() {
+  return (
+    <footer className="site-footer">
+      <div className="container footer-inner">
+        <div>
+          <strong>StructLab</strong>
+          <p>Học cấu trúc dữ liệu bằng cách nhìn thấy từng bước.</p>
+        </div>
+        <div className="footer-links">
+          <Link href="/visualizer">Mô phỏng</Link>
+          <Link href="/practice">Luyện tập</Link>
+          <a href="http://localhost:8080/swagger-ui.html" target="_blank" rel="noreferrer">
+            API Docs
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+}
