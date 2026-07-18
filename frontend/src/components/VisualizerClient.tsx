@@ -21,7 +21,7 @@ import {
   Zap,
 } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { apiFetch } from "@/lib/api";
+import { API_ORIGIN, apiFetch } from "@/lib/api";
 import type { Operation, VisualizationResponse } from "@/lib/types";
 
 type Structure = "array" | "stack" | "queue";
@@ -174,7 +174,7 @@ export function VisualizerClient() {
             <h1>Data Structure Visualizer</h1>
             <p>Tạo chuỗi thao tác, dự đoán kết quả và quan sát backend tính từng trạng thái.</p>
           </div>
-          <div className="api-status"><i /> REST API đang kết nối <code>localhost:8080</code></div>
+          <div className="api-status"><i /> REST API đang kết nối <code>{new URL(API_ORIGIN).host}</code></div>
         </div>
       </section>
 

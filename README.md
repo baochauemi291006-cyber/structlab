@@ -161,13 +161,13 @@ Trên Windows PowerShell, dùng `$env:DB_URL="..."` thay cho `export`.
 
 ## Triển khai miễn phí
 
-Dự án đã có cấu hình production cho mô hình miễn phí:
+Dự án đã có Render Blueprint để tạo toàn bộ hệ thống miễn phí trong một lần:
 
-- Vercel Hobby chạy frontend Next.js.
-- Render Free chạy backend Spring Boot từ [`render.yaml`](render.yaml).
-- Neon Free lưu PostgreSQL lâu dài hơn filesystem tạm của web service.
+- Render Static Site chạy frontend Next.js.
+- Render Free Web Service chạy backend Spring Boot.
+- Render Free PostgreSQL lưu tài khoản và tiến độ trong 30 ngày.
 
-Xem hướng dẫn và các biến môi trường tại [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
+Mở hướng dẫn one-click và các lưu ý tại [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ## Kiểm thử và build
 

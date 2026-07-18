@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: structlab-api
+    name: structlab-api-baochauemi291006
     runtime: docker
     plan: free
     region: singapore
@@ -11,12 +11,26 @@ services:
     healthCheckPath: /actuator/health
     autoDeployTrigger: commit
     envVars:
-      - key: DB_URL
-        sync: false
+      - key: DB_HOST
+        fromDatabase:
+          name: structlab-db-baochauemi291006
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: structlab-db-baochauemi291006
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: structlab-db-baochauemi291006
+          property: database
       - key: DB_USERNAME
-        sync: false
+        fromDatabase:
+          name: structlab-db-baochauemi291006
+          property: user
       - key: DB_PASSWORD
-        sync: false
+        fromDatabase:
+          name: structlab-db-baochauemi291006
+          property: password
       - key: DB_DRIVER
         value: org.postgresql.Driver
       - key: JWT_SECRET
@@ -24,6 +38,32 @@ services:
       - key: JWT_TTL_HOURS
         value: "24"
       - key: CORS_ALLOWED_ORIGIN_PATTERNS
-        value: https://structlab*.vercel.app
+        value: https://structlab-baochauemi291006*.onrender.com
       - key: JAVA_TOOL_OPTIONS
         value: -XX:MaxRAMPercentage=70.0 -XX:+UseSerialGC
+
+  - type: web
+    name: structlab-baochauemi291006
+    runtime: static
+    branch: main
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./out
+    autoDeployTrigger: commit
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: structlab-api-baochauemi291006
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: STATIC_EXPORT
+        value: "true"
+      - key: NODE_VERSION
+        value: "22"
+
+databases:
+  - name: structlab-db-baochauemi291006
+    plan: free
+    region: singapore
+    databaseName: structlab
+    user: structlab

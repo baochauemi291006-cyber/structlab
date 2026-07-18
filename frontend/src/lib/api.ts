@@ -1,4 +1,9 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080/api";
+const configuredApiUrl = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080/api")
+  .replace(/\/+$/, "");
+export const API_URL = configuredApiUrl.endsWith("/api")
+  ? configuredApiUrl
+  : `${configuredApiUrl}/api`;
+export const API_ORIGIN = API_URL.replace(/\/api$/, "");
 
 type ApiErrorBody = {
   message?: string;
@@ -35,7 +40,7 @@ export async function apiFetch<T>(
     response = await fetch(`${API_URL}${path}`, { ...init, headers });
   } catch {
     throw new ApiError(
-      "Không thể kết nối backend. Hãy kiểm tra Spring Boot đang chạy ở cổng 8080.",
+      "Không thể kết nối REST API. Hãy thử lại sau hoặc kiểm tra trạng thái backend.",
       0,
     );
   }

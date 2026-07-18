@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { API_ORIGIN } from "@/lib/api";
 
 export function Footer() {
   return (
@@ -11,7 +12,7 @@ export function Footer() {
         <div className="footer-links">
           <Link href="/visualizer">Mô phỏng</Link>
           <Link href="/practice">Luyện tập</Link>
-          <a href="http://localhost:8080/swagger-ui.html" target="_blank" rel="noreferrer">
+          <a href={`${API_ORIGIN}/swagger-ui.html`} target="_blank" rel="noreferrer">
             API Docs
           </a>
         </div>

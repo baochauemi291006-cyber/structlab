@@ -12,8 +12,9 @@ WORKDIR /app
 
 RUN addgroup -S spring && adduser -S spring -G spring
 COPY --from=builder /workspace/target/structlab-api-*.jar app.jar
-RUN chown spring:spring app.jar
+COPY docker-entrypoint.sh docker-entrypoint.sh
+RUN chmod +x docker-entrypoint.sh && chown spring:spring app.jar docker-entrypoint.sh
 
 USER spring
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
