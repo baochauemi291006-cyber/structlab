@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: structlab-api
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /actuator/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: DB_URL
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_DRIVER
+        value: org.postgresql.Driver
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_TTL_HOURS
+        value: "24"
+      - key: CORS_ALLOWED_ORIGIN_PATTERNS
+        value: https://structlab*.vercel.app
+      - key: JAVA_TOOL_OPTIONS
+        value: -XX:MaxRAMPercentage=70.0 -XX:+UseSerialGC

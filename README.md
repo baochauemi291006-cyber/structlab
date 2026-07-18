@@ -130,6 +130,7 @@ Chi tiết request và response nằm trong Swagger UI hoặc [docs/API_EXAMPLES
 | `JWT_SECRET` | khóa local mẫu | Khóa ký JWT, phải đổi khi triển khai thật |
 | `JWT_TTL_HOURS` | `24` | Thời hạn token theo giờ |
 | `CORS_ALLOWED_ORIGINS` | `http://localhost:3000` | Các frontend được gọi API, phân tách bằng dấu phẩy |
+| `CORS_ALLOWED_ORIGIN_PATTERNS` | trống | Mẫu origin dùng cho preview deployment, phân tách bằng dấu phẩy |
 
 ### Frontend
 
@@ -157,6 +158,16 @@ cd backend
 ```
 
 Trên Windows PowerShell, dùng `$env:DB_URL="..."` thay cho `export`.
+
+## Triển khai miễn phí
+
+Dự án đã có cấu hình production cho mô hình miễn phí:
+
+- Vercel Hobby chạy frontend Next.js.
+- Render Free chạy backend Spring Boot từ [`render.yaml`](render.yaml).
+- Neon Free lưu PostgreSQL lâu dài hơn filesystem tạm của web service.
+
+Xem hướng dẫn và các biến môi trường tại [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ## Kiểm thử và build
 
@@ -210,7 +221,7 @@ structlab/
 - Dùng Monaco Editor để chấm code Java trực tiếp.
 - Thêm vai trò giảng viên, lớp học, bài tập và bảng xếp hạng.
 - Viết integration test bằng Testcontainers và end-to-end test bằng Playwright.
-- Triển khai frontend lên Vercel, backend và PostgreSQL lên Render, Railway hoặc VPS.
+- Thêm custom domain, giám sát uptime và quy trình backup database.
 
 ## Giấy phép
 
